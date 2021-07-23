@@ -5,6 +5,8 @@
 use std::collections::HashMap;
 use rocket::State;
 use std::fs;
+use serde::Serialize;
+use rocket_contrib::json::Json;
 
 #[get("/skill?<s>")]
 fn skill(skills: State<HashMap<String, String>>, s: String) -> String {
@@ -16,12 +18,23 @@ fn package(packages: State<HashMap<String, HashMap<String, String>>>, t: String,
     packages.get(p.as_str()).unwrap().get(t.as_str()).unwrap().to_string()
 }
 
+#[derive(Serialize)]
+struct Tabs {
+    tabs: Vec<String>
+}
+
+#[get("/tabs?<p>")]
+fn tabs(packages: State<HashMap<String, HashMap<String, String>>>, p: String) -> Json<Vec<String>> {
+    let package: Vec<String> = packages.get(p.as_str()).unwrap().keys().cloned().collect();
+    Json(package)
+}
+
 fn main() {
     // BUILD NEW FILES AND PARSE TREE FILE
     let skills = load_skills();
     let packages = load_packages();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skill, package]).launch();
+    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skill, package, tabs]).launch();
 }
 
 fn load_skills() -> HashMap<String, String> {
