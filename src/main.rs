@@ -18,6 +18,13 @@ fn package(packages: State<HashMap<String, HashMap<String, String>>>, t: String,
     packages.get(p.as_str()).unwrap().get(t.as_str()).unwrap().to_string()
 }
 
+#[get("/list_packages")]
+fn list_packages(packages: State<HashMap<String, HashMap<String, String>>>) -> Json<Vec<String>> {
+    let keys: Vec<String> = packages.keys().cloned().collect();
+    Json(keys)
+}
+
+
 #[derive(Serialize)]
 struct Tabs {
     tabs: Vec<String>
@@ -34,7 +41,7 @@ fn main() {
     let skills = load_skills();
     let packages = load_packages();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skill, package, tabs]).launch();
+    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skill, package, tabs, list_packages]).launch();
 }
 
 fn load_skills() -> HashMap<String, String> {
