@@ -2,19 +2,39 @@
 
 #[macro_use] extern crate rocket;
 
-use std::collections::HashMap;
+use serde::Serialize;
 use rocket::State;
 use std::fs;
 use rocket_contrib::json::Json;
 
+#[derive(Serialize, Clone)]
+struct Package {
+    packageurl: String,
+    tabs: Vec<Tab>,
+}
+
+#[derive(Serialize, Clone)]
+struct Tab {
+    taburl: String,
+    content: String,
+}
+
+#[derive(Serialize, Clone)]
+struct Skill {
+    url: String,
+    content: String,
+}
+
 #[get("/skills")]
-fn skills(skills: State<HashMap<String, String>>) -> Json<HashMap<String, String>> {
-    Json(skills.inner().to_owned())
+fn skills_route(skills: State<Vec<Skill>>) -> Json<Vec<Skill>> {
+    let skills = skills.inner().to_owned();
+    Json(skills)
 }
 
 #[get("/packages")]
-fn packages(packages: State<HashMap<String, HashMap<String, String>>>) -> Json<HashMap<String, HashMap<String, String>>> {
-    Json(packages.inner().to_owned())
+fn packages_route(packages: State<Vec<Package>>) -> Json<Vec<Package>> {
+    let packages = packages.inner().to_owned();
+    Json(packages)
 }
 
 fn main() {
@@ -22,11 +42,11 @@ fn main() {
     let skills = load_skills();
     let packages = load_packages();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skills, packages]).launch();
+    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skills_route, packages_route]).launch();
 }
 
-fn load_skills() -> HashMap<String, String> {
-    let mut skills = HashMap::new();
+fn load_skills() -> Vec<Skill> {
+    let mut skills = vec![];
     for skill in fs::read_dir("./pages").unwrap() {
         let path = skill.unwrap().path();
 
@@ -34,25 +54,30 @@ fn load_skills() -> HashMap<String, String> {
             continue;
         }
 
-        let skill = path.file_stem().unwrap().to_str().unwrap().to_string();
+        let url = path.file_stem().unwrap().to_str().unwrap().to_string();
         let content = fs::read_to_string(path).unwrap();
 
-        skills.insert(skill, content);
+        let skill = Skill {
+            url,
+            content,
+        };
+
+        skills.push(skill);
     }
     skills
 }
 
-fn load_packages() -> HashMap<String, HashMap<String, String>> {
-    let mut packages = HashMap::new();
+fn load_packages() -> Vec<Package> {
+    let mut packages = vec![];
     for package in fs::read_dir("./packages").unwrap() {
         let path = package.unwrap().path();
 
         if !path.is_dir() {
             continue;
         }
-        let packagename = path.file_stem().unwrap().to_str().unwrap().to_string();
+        let packageurl = path.file_stem().unwrap().to_str().unwrap().to_string();
 
-        let mut package = HashMap::new();
+        let mut tabs = vec![];
         for tab in fs::read_dir(path).unwrap() {
             let path = tab.unwrap().path();
 
@@ -60,14 +85,24 @@ fn load_packages() -> HashMap<String, HashMap<String, String>> {
                 continue
             }
 
-            let tabname = path.file_stem().unwrap().to_str().unwrap().to_string();
+            let taburl = path.file_stem().unwrap().to_str().unwrap().to_string();
             let content = fs::read_to_string(path).unwrap();
             let content = tabparse(content);
 
-            package.insert(tabname, content);
+            let tab = Tab {
+                taburl,
+                content,
+            };
+
+            tabs.push(tab);
         }
 
-        packages.insert(packagename, package);
+        let package = Package {
+            packageurl,
+            tabs,
+        };
+
+        packages.push(package);
     }
     packages
 }
