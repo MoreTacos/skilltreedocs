@@ -5,35 +5,16 @@
 use std::collections::HashMap;
 use rocket::State;
 use std::fs;
-use serde::Serialize;
 use rocket_contrib::json::Json;
 
-#[get("/skill?<s>")]
-fn skill(skills: State<HashMap<String, String>>, s: String) -> String {
-    skills.get(s.as_str()).unwrap().to_string()
+#[get("/skills")]
+fn skills(skills: State<HashMap<String, String>>) -> Json<HashMap<String, String>> {
+    Json(skills.inner().to_owned())
 }
 
-#[get("/package?<p>&<t>")]
-fn package(packages: State<HashMap<String, HashMap<String, String>>>, t: String, p: String) -> String {
-    packages.get(p.as_str()).unwrap().get(t.as_str()).unwrap().to_string()
-}
-
-#[get("/list_packages")]
-fn list_packages(packages: State<HashMap<String, HashMap<String, String>>>) -> Json<Vec<String>> {
-    let keys: Vec<String> = packages.keys().cloned().collect();
-    Json(keys)
-}
-
-
-#[derive(Serialize)]
-struct Tabs {
-    tabs: Vec<String>
-}
-
-#[get("/tabs?<p>")]
-fn tabs(packages: State<HashMap<String, HashMap<String, String>>>, p: String) -> Json<Vec<String>> {
-    let package: Vec<String> = packages.get(p.as_str()).unwrap().keys().cloned().collect();
-    Json(package)
+#[get("/packages")]
+fn packages(packages: State<HashMap<String, HashMap<String, String>>>) -> Json<HashMap<String, HashMap<String, String>>> {
+    Json(packages.inner().to_owned())
 }
 
 fn main() {
@@ -41,7 +22,7 @@ fn main() {
     let skills = load_skills();
     let packages = load_packages();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skill, package, tabs, list_packages]).launch();
+    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skills, packages]).launch();
 }
 
 fn load_skills() -> HashMap<String, String> {
