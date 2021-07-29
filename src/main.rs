@@ -49,7 +49,7 @@ fn main() {
 
     reqwest::blocking::Client::new().post("https://gymskilltree.com/sync").send().ok();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![skills_route, packages_route]).launch();
+    rocket::ignite().manage(skills).manage(packages).mount("/", routes![index, skills_route, packages_route]).launch();
 }
 
 fn load_skills() -> Vec<Skill> {
