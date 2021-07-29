@@ -25,6 +25,11 @@ struct Skill {
     content: String,
 }
 
+#[get("/")]
+fn index() -> String {
+    "Welcome to skilltreedocs. Try to /skills and /packages route for relevant paths".to_string()
+}
+
 #[get("/skills")]
 fn skills_route(skills: State<Vec<Skill>>) -> Json<Vec<Skill>> {
     let skills = skills.inner().to_owned();
