@@ -56,6 +56,7 @@ fn load_skills() -> Vec<Skill> {
 
         let url = path.file_stem().unwrap().to_str().unwrap().to_string();
         let content = fs::read_to_string(path).unwrap();
+        let content = skillparse(content);
 
         let skill = Skill {
             url,
@@ -105,6 +106,18 @@ fn load_packages() -> Vec<Package> {
         packages.push(package);
     }
     packages
+}
+
+fn skillparse(content: String) -> String {
+    let mut options = comrak::ComrakOptions::default();
+    options.render.unsafe_ = true;
+    let content = comrak::markdown_to_html(&content, &options);
+    let content = r###"{% extends "docs" %}
+
+{% block body %}"###.to_string() + &content + r###"
+<div class="issue"><a href="https://github.com/MoreTacos/skilltreedocs/tree/master/pages/{{ skill }}.md">Add something to the page?</a></div>"### + r###"
+{% endblock %}"###;
+    content.to_string()
 }
 
 fn tabparse(content: String) -> String {
