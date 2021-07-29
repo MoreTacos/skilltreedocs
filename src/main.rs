@@ -42,6 +42,8 @@ fn main() {
     let skills = load_skills();
     let packages = load_packages();
 
+    reqwest::blocking::Client::new().post("https://gymskilltree.com/sync").send().ok();
+
     rocket::ignite().manage(skills).manage(packages).mount("/", routes![skills_route, packages_route]).launch();
 }
 
