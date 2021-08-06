@@ -1,3 +1,3 @@
 # Back Tuck with 1/2 Twist
 
-GIF does not exist yet.
+<iframe src="https://giphy.com/embed/JxobhgGV6hnqiWIxTU" width="480" height="406" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/JxobhgGV6hnqiWIxTU">via GIPHY</a></p>
