@@ -1,0 +1,50 @@
+<div class="tw-toggle">
+  <div class="learned-status">
+    <input
+        {% if skills.^@skillurl@^ %}
+          {% if skills.^@skillurl@^ == 0 %}
+            checked
+          {% endif %}
+        {% else %}
+          checked
+        {% endif %}
+      type="radio"
+      name="toggle-^@skillurl@^-^@i@^"
+      value="0"
+      onclick="fetch(`/update?u={{ userurl }}&s=^@skillurl@^&v=${this.value}`, { method: 'PUT' });
+                this.closest('g').previousElementSibling.style.fill = `hsl(${this.value}, 50%, 50%)`"
+    />
+    <label class="toggle toggle-yes"><i class="fa fa-times"></i></label>
+  </div>
+  <div class="learned-status">
+    <input
+        {% if skills.^@skillurl@^ %}
+          {% if skills.^@skillurl@^ > 0 %}
+            checked
+          {% endif %}
+        {% endif %}
+      type="radio"
+      name="toggle-^@skillurl@^-^@i@^"
+      value="50"
+      onclick="fetch(`/update?u={{ userurl }}&s=^@skillurl@^&v=${this.value}`, { method: 'PUT' });
+                this.closest('g').previousElementSibling.style.fill = `hsl(${this.value}, 50%, 50%)`"
+    />
+    <label class="toggle toggle-yes"><i class="fa fa-minus"></i></label>
+  </div>
+  <div class="learned-status">
+    <input
+        {% if skills.^@skillurl@^ %}
+          {% if skills.^@skillurl@^ == 100 %}
+            checked
+          {% endif %}
+        {% endif %}
+      type="radio"
+      name="toggle-^@skillurl@^-^@i@^"
+      value="100"
+      onclick="fetch(`/update?u={{ userurl }}&s=^@skillurl@^&v=${this.value}`, { method: 'PUT' });
+                this.closest('g').previousElementSibling.style.fill = `hsl(${this.value}, 50%, 50%)`"
+    />
+    <label class="toggle toggle-yes"><i class="fa fa-check"></i></label>
+  </div>
+  <span></span>
+</div>

@@ -1,11 +1,29 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
-use serde::Serialize;
+use rocket::response::content::Html as HtmlResponse;
 use rocket::State;
-use std::fs;
 use rocket_contrib::json::Json;
+use rocket_contrib::serve::StaticFiles;
+use rocket_contrib::templates::tera::Context;
+use rocket_contrib::templates::tera::Tera;
+use scraper::ElementRef;
+use scraper::Html;
+use scraper::Selector;
+use serde::Serialize;
+use std::collections::HashMap;
+use std::fs;
+use html5ever::tree_builder::TreeSink;
+use html5ever::interface::Attribute;
+use html5ever::interface::QualName;
+use html5ever::tendril::Tendril;
+use html5ever::tree_builder::NodeOrText;
+use html5ever::tree_builder::ElementFlags;
+use markup5ever::LocalName;
+use markup5ever::Namespace;
+
 
 #[derive(Serialize, Clone)]
 struct Package {
@@ -42,14 +60,75 @@ fn packages_route(packages: State<Vec<Package>>) -> Json<Vec<Package>> {
     Json(packages)
 }
 
+#[get("/tramp")]
+fn tramp(packages: State<Vec<Package>>) -> HtmlResponse<String> {
+    let tramp = packages
+        .inner()
+        .to_owned()
+        .into_iter()
+        .find(|p| p.packageurl == "MAG")
+        .unwrap()
+        .tabs
+        .into_iter()
+        .find(|t| t.taburl == "Tramp")
+        .unwrap()
+        .content;
+    let mut tera = Tera::default();
+    tera.add_template_file("./templates/user.html.tera", Some("user"))
+        .unwrap();
+    tera.add_raw_template("tramp", &tramp).unwrap();
+
+    let mut skills = HashMap::new();
+    skills.insert("12airplane", 50);
+    skills.insert("basicbouncing", 100);
+    skills.insert("backtuck", 0);
+
+    let mut context = Context::new();
+    context.insert("username", "Davide");
+    context.insert("userurl", "abcdefg");
+    context.insert("skills", &skills);
+    HtmlResponse(tera.render("tramp", &context).unwrap())
+}
+
+#[get("/backtuck")]
+fn backtuck(skills: State<Vec<Skill>>) -> HtmlResponse<String> {
+    let backtuck = skills
+        .inner()
+        .to_owned()
+        .into_iter()
+        .find(|s| s.url == "backtuck")
+        .unwrap()
+        .content;
+    let mut tera = Tera::default();
+    tera.add_template_file("./templates/docs.html.tera", Some("docs"))
+        .unwrap();
+    tera.add_raw_template("backtuck", &backtuck).unwrap();
+    let mut context = Context::new();
+    context.insert("skill", "Back Tuck");
+    HtmlResponse(tera.render("backtuck", &context).unwrap())
+}
+
 fn main() {
     // BUILD NEW FILES AND PARSE TREE FILE
     let skills = load_skills();
     let packages = load_packages();
 
-    reqwest::blocking::Client::new().post("https://gymskilltree.com/sync").send().ok();
+    reqwest::blocking::Client::new()
+        .post("https://gymskilltree.com/sync")
+        .send()
+        .ok();
 
-    rocket::ignite().manage(skills).manage(packages).mount("/", routes![index, skills_route, packages_route]).launch();
+    /*
+    rocket::ignite()
+        .manage(skills)
+        .manage(packages)
+        .mount("/static", StaticFiles::from("static"))
+        .mount(
+            "/",
+            routes![index, tramp, backtuck, skills_route, packages_route],
+        )
+        .launch();
+    */
 }
 
 fn load_skills() -> Vec<Skill> {
@@ -65,10 +144,7 @@ fn load_skills() -> Vec<Skill> {
         let content = fs::read_to_string(path).unwrap();
         let content = skillparse(content);
 
-        let skill = Skill {
-            url,
-            content,
-        };
+        let skill = Skill { url, content };
 
         skills.push(skill);
     }
@@ -90,80 +166,79 @@ fn load_packages() -> Vec<Package> {
             let path = tab.unwrap().path();
 
             if !path.to_str().unwrap().contains(".svg") {
-                continue
+                continue;
             }
 
             let taburl = path.file_stem().unwrap().to_str().unwrap().to_string();
             let content = fs::read_to_string(path).unwrap();
             let content = tabparse(content);
 
-            let tab = Tab {
-                taburl,
-                content,
-            };
+            let tab = Tab { taburl, content };
 
             tabs.push(tab);
         }
 
-        let package = Package {
-            packageurl,
-            tabs,
-        };
+        let package = Package { packageurl, tabs };
 
         packages.push(package);
     }
     packages
 }
 
+#[derive(Serialize)]
+struct SkillContext {
+    skillinfo: String,
+}
+
 fn skillparse(content: String) -> String {
     let mut options = comrak::ComrakOptions::default();
     options.render.unsafe_ = true;
-    let content = comrak::markdown_to_html(&content, &options);
-    let content = r###"{% extends "docs" %}
-
-{% block body %}"###.to_string() + &content + r###"
-<div class="issue"><a href="https://github.com/MoreTacos/skilltreedocs/tree/master/pages/{{ skill }}.md">Add something to the page?</a></div>"### + r###"
-{% endblock %}"###;
-    content.to_string()
+    let template = include_str!("../templates/skill.html");
+    template.replace("^@@^", &comrak::markdown_to_html(&content, &options))
 }
 
 fn tabparse(content: String) -> String {
-    let mut svg = content;
-    // Remove all <span> tags
-    svg = svg.replace(r"<span>", "");
-    svg = svg.replace(r"</span>", "");
+    // goals:
+    // parse the skill name
+    // parse the skillurl
+    // add a three way toggle after text
+    // add a .skill class to rect
+    // add a color to rect
+    
+    let mut content = content.replace(r###"fill="#cce5ff""###, "");
 
-    let mut sliced = svg.split(r"<rect");
+    let toggle = include_str!("../templates/toggle.html");
+    let select_switch = Selector::parse("switch").unwrap();
+    let select_foreign_object = Selector::parse("foreignObject").unwrap();
+    let select_div = Selector::parse("div").unwrap();
+    let select_rect = Selector::parse("rect").unwrap();
 
-    // Removing the first slice, which is irrelevant
+    let mut doc = Html::parse_fragment(&content);
 
-    let mut svg = r###"{% extends "user" %}
-{% block tree %}
-"###
-    .to_string()
-        + sliced.next().unwrap();
-
-    let sliced: Vec<_> = sliced.collect();
-
-    for slice in sliced {
-        let mut slice = slice.to_string();
-        if slice.contains("span") {
-            println!("Element containing span might not be displayed");
-        }
-
-        // find skill
-        let mut search_domain = slice.to_string().clone();
-
-        // closer to answer 1
-        let from = search_domain.find("word-wrap").unwrap();
-        search_domain = search_domain[from..].to_string();
-
-        let from2 = search_domain.find(">").unwrap();
-        let to = search_domain.find("<").unwrap();
-
-        let skill_exact = search_domain[from2 + 1..to].to_string();
-
-        let skill = skill_exact
+    for rect in doc.clone().select(&select_rect) {
+            let g = rect
+            .next_siblings()
+            .find(|n| n.value().is_element())
+            .and_then(ElementRef::wrap)
+            .unwrap();
+        let skilldiv = g
+            .select(&select_switch)
+            .next()
+            .unwrap()
+            .select(&select_foreign_object)
+            .next()
+            .unwrap()
+            .select(&select_div)
+            .next()
+            .unwrap()
+            .select(&select_div)
+            .next()
+            .unwrap()
+            .select(&select_div)
+            .next()
+            .unwrap();
+        let skill = skilldiv.clone().inner_html().trim().to_string();
+        let skillurl = skill
             .split_whitespace()
             .collect::<String>()
             .chars()
@@ -171,63 +246,47 @@ fn tabparse(content: String) -> String {
             .collect::<String>()
             .to_lowercase();
 
-        let skill_exact_correct = slice.to_string().clone()[from..from + to].to_string();
+        let parent = skilldiv.id();
+        //let toggle_selector = Selector::parse("div.tw-toggle").unwrap();
+        //let frag = Html::parse_document(&toggle);
+        //let toggle = frag.select(&toggle_selector).next().unwrap();
+        let skillurl = Attribute {
+            name: QualName::new(None, Namespace::from(""), LocalName::from("skillurl")),
+            value: skillurl.into(),
+        };
+        let attrs = vec![skillurl];
+        let flags = ElementFlags::default();
+        let toggle = doc.create_element(QualName::new(None, Namespace::from(""), LocalName::from("drag")), attrs, flags);
+        let child = NodeOrText::AppendNode(toggle);
 
-        // skip if empty
-        if skill == "".to_string() {
-            println!("Skipped empty box");
-            continue;
-        }
+        doc.append(&parent, child);
 
-        let color = "{% if skills.".to_string()
-            + &skill
-            + "%}{{ skills."
-            + &skill
-            + "}}{% else %}0{% endif %}";
-
-        // input slider
-        let onchange = format!(
-            r###"fetch(`/update?u={{{{ userhash }}}}&s={}&v=${{this.value}}`, {{ method: 'PUT' }})"###,
-            &skill
-        );
-        let oninput = r###"this.closest('g').previousElementSibling.style.fill = `hsl(${this.value}, 50%, 50%)`"###;
-        let mut skill_exact_correct_with_input = skill_exact_correct.clone()
-            + r###"<input type="range" min="0" max="100" value=""###
-            + &color
-            + r###"" onchange=""###
-            + &onchange
-            + r###"" oninput=""###
-            + &oninput
-            + r###"">"###;
-        skill_exact_correct_with_input = skill_exact_correct_with_input.replace(
-            &skill_exact,
-            &format!(
-                r###"<p><a href="/skill?s={}">{}</a></p>"###,
-                &skill, &skill_exact
-            ),
-        );
-        slice = slice.replace(&skill_exact_correct, &skill_exact_correct_with_input);
-
-        // Skill value finder and remove (A) | (B) | (C) etc...
-
-        let mut skillvalue: String = "".to_string();
-
-        for c in "ABCDEFGHIabcdefghi".chars() {
-            let search = format!("({})", &c);
-            if slice.contains(&search) {
-                skillvalue = c.to_string();
-                slice = slice.replace(&search, "");
-            }
-        }
-
-        svg =
-            svg + r###"<rect fill="hsl("### + &color + r###", 50%, 50%)" class="skill""### + &slice;
+        let class = Attribute {
+            name: QualName::new(None, Namespace::from(""), LocalName::from("class")),
+            value: Tendril::from("skill"),
+        };
+        let fill = Attribute {
+            name: QualName::new(None, Namespace::from(""), LocalName::from("fill")),
+            value: Tendril::from(r###"hsl({% if skills.^@skillurl@^ %}{{ ^@skillurl@^ }}{% else %}0{% endif %}, 50%, 50%)"###)
+        };
+        let attrs = vec![class, fill];
+        let target = rect.id();
+        doc.add_attrs_if_missing(&target, attrs);
     }
 
-    svg = svg
-        + r###"
-{% endblock %}"###;
+    let mut content = doc.root_element().html(); 
+    let select_drag = Selector::parse("drag").unwrap();
 
-    svg = svg.replace(r"<br>", "");
-    svg.to_string()
+    for drag in doc.select(&select_drag) {
+        let node = drag.html();
+        dbg!(&node);
+        let skillurl = drag.value().attr("skillurl").unwrap();
+        let toggle = toggle.clone().replace("^@skillurl@^", &skillurl);
+        content = content.replace(&node, &toggle);
+    }
+
+    dbg!(&content);
+
+    let template = include_str!("../templates/tab.html");
+    template.replace("^@@^", &content)
 }
