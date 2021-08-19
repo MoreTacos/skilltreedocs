@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-08-19T14:25:14.714Z" agent="5.0 (Macintosh)" etag="sntXfNkJtZH9O0Ykq2LO" version="14.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-08-19T14:29:06.487Z" agent="5.0 (Macintosh)" etag="YJznOn0iTHpBK2HsmP2G" version="14.9.4" type="github">
   <diagram id="RV4zC79hD4O7UWAC9cw_" name="Page-1">
     <mxGraphModel dx="1873" dy="508" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -459,10 +459,13 @@
         <mxCell id="A6usUt462V9UMGtc1Mbl-137" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-138" target="A6usUt462V9UMGtc1Mbl-139">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-138" value="Luconi Stretched With 1/2 Twist&lt;br&gt;(4.6)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-138" value="Scherbo With 1/2 Twist&lt;br&gt;(4.2)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="2810" y="250" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-139" value="Luconi Stretched With 1/1 Twist&lt;br&gt;(5.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-323" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-139" target="A6usUt462V9UMGtc1Mbl-320">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-139" value="Scherbo With 1/1 Twist&lt;br&gt;(4.6)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="2980" y="250" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-142" target="A6usUt462V9UMGtc1Mbl-144">
@@ -902,6 +905,21 @@
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-316" value="Scherbo Entry Back Tuck With 3/2 Twist&lt;br&gt;(3.8)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="2810" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-324" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-320" target="A6usUt462V9UMGtc1Mbl-321">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-320" value="Scherbo With 3/2 Twist&lt;br&gt;(5.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="3145" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-325" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-321" target="A6usUt462V9UMGtc1Mbl-322">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-321" value="&lt;div&gt;Scherbo With 2/1 Twist&lt;/div&gt;&lt;div&gt;Shirai 3&lt;br&gt;&lt;/div&gt;(5.4)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="3300" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-322" value="Scherbo With 5/2 Twist&lt;br&gt;(5.8)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="3440" y="250" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
