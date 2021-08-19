@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-08-19T15:22:16.123Z" agent="5.0 (Macintosh)" etag="OirYabjXZ2glJDk7xtvf" version="14.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-08-19T15:24:46.394Z" agent="5.0 (Macintosh)" etag="BWt7aUMnJ_R5Xl1qLrTn" version="14.9.4" type="github">
   <diagram id="RV4zC79hD4O7UWAC9cw_" name="Page-1">
     <mxGraphModel dx="1873" dy="508" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -281,6 +281,9 @@
               <mxPoint x="1450" y="1660" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-348" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-82" target="A6usUt462V9UMGtc1Mbl-345">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-82" value="Handspring Double Front Tuck&lt;br&gt;&lt;i&gt;Roche&lt;br&gt;&lt;/i&gt;(&lt;i&gt;5.2)&lt;/i&gt;" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1390" y="1690" width="120" height="60" as="geometry" />
@@ -988,11 +991,20 @@
         <mxCell id="A6usUt462V9UMGtc1Mbl-340" value="&lt;div&gt;Handspring Front Tuck With 2/1 Twist&lt;/div&gt;&lt;div&gt;Canbas&lt;br&gt;&lt;/div&gt;(4.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1660" y="1990" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-350" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-343" target="A6usUt462V9UMGtc1Mbl-349">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-343" value="&lt;div&gt;Handspring Double Front Pike&lt;/div&gt;&lt;div&gt;Blanik&lt;/div&gt;&lt;div&gt;(5.6)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1550" y="1630" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-345" value="&lt;div&gt;Handspring Double Front Tucked With 1/2 Twist&lt;/div&gt;&lt;div&gt;Dragulescu&lt;/div&gt;&lt;div&gt;(5.6)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-351" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-345" target="A6usUt462V9UMGtc1Mbl-349">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-345" value="&lt;div&gt;Handspring Double Front Tucked With 1/2 Twist&lt;/div&gt;&lt;div&gt;Dragulescu/Zimmerman&lt;/div&gt;&lt;div&gt;(5.6)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1550" y="1710" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-349" value="&lt;div&gt;Dragulescu Piked&lt;/div&gt;&lt;div&gt;Ri Se Gwang 2&lt;/div&gt;&lt;div&gt;(6.0)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1720" y="1630" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
