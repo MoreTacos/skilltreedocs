@@ -1,17 +1,9 @@
-<mxfile host="app.diagrams.net" modified="2021-08-20T02:58:08.574Z" agent="5.0 (Macintosh)" etag="wi8yGgmV2jPIWKZf-qOb" version="14.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-08-20T03:02:53.356Z" agent="5.0 (Macintosh)" etag="vBzlhFIMK-VOzO7l1g3J" version="14.9.4" type="github">
   <diagram id="RV4zC79hD4O7UWAC9cw_" name="Page-1">
     <mxGraphModel dx="1873" dy="508" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="A6usUt462V9UMGtc1Mbl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-4" target="A6usUt462V9UMGtc1Mbl-58">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="930" y="2010" />
-              <mxPoint x="930" y="1940" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-4" target="A6usUt462V9UMGtc1Mbl-6">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -20,16 +12,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-4" target="A6usUt462V9UMGtc1Mbl-16">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="930" y="2010" />
-              <mxPoint x="930" y="2210" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-364" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-4" target="A6usUt462V9UMGtc1Mbl-339">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-4" value="Front Handspring (1.6)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="780" y="1980" width="120" height="60" as="geometry" />
+          <mxGeometry x="570" y="1980" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-6" target="A6usUt462V9UMGtc1Mbl-9">
           <mxGeometry relative="1" as="geometry" />
@@ -82,7 +69,7 @@
         <mxCell id="A6usUt462V9UMGtc1Mbl-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-23" target="A6usUt462V9UMGtc1Mbl-33">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-23" target="A6usUt462V9UMGtc1Mbl-85">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-356" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-23" target="A6usUt462V9UMGtc1Mbl-338">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-23" value="1/4 Turn On &lt;br&gt;(1.6)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
@@ -985,11 +972,17 @@
         <mxCell id="A6usUt462V9UMGtc1Mbl-335" value="&lt;div&gt;Kasamatsu Stretched With 3/2 Twist&lt;/div&gt;&lt;div&gt;Yonekura&lt;br&gt;&lt;/div&gt;(6.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="3240" y="1260" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-338" value="INSERT SNAP DOWN AND TSUK DRILLS" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1330" y="1310" width="120" height="60" as="geometry" />
+        <mxCell id="A6usUt462V9UMGtc1Mbl-357" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-338" target="A6usUt462V9UMGtc1Mbl-85">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-339" value="Insert Hand Front Drills" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="860" y="1840" width="120" height="60" as="geometry" />
+        <mxCell id="A6usUt462V9UMGtc1Mbl-338" value="1/4 Turn On, Rotate to Back On Vault Height Mats Or Higher" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="1300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-365" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-339" target="A6usUt462V9UMGtc1Mbl-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-339" value="Front Handspring To Mats Level With Vault Or Higher" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="1910" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-340" value="&lt;div&gt;Handspring Front Tuck With 2/1 Twist&lt;/div&gt;&lt;div&gt;Canbas&lt;br&gt;&lt;/div&gt;(4.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1660" y="1990" width="120" height="60" as="geometry" />
@@ -1017,6 +1010,24 @@
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-353" value="&lt;div&gt;Handspring Front Layout With 3/1 Twist&lt;/div&gt;&lt;div&gt;Yang Hak Seon&lt;br&gt;&lt;/div&gt;(6.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="2220" y="1800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-359" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-358" target="A6usUt462V9UMGtc1Mbl-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-358" value="Trampoline 1/2 In, Back Tuck Out" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-362" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-360" target="A6usUt462V9UMGtc1Mbl-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-360" value="Floor, Front Handspring, Front Tuck" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="830" y="1770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-363" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-361" target="A6usUt462V9UMGtc1Mbl-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-361" value="Trampoline Double Front Tuck" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="1710" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
