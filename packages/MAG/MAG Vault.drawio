@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-08-19T15:24:46.394Z" agent="5.0 (Macintosh)" etag="BWt7aUMnJ_R5Xl1qLrTn" version="14.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-08-20T02:58:08.574Z" agent="5.0 (Macintosh)" etag="wi8yGgmV2jPIWKZf-qOb" version="14.9.4" type="github">
   <diagram id="RV4zC79hD4O7UWAC9cw_" name="Page-1">
     <mxGraphModel dx="1873" dy="508" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -254,16 +254,19 @@
         <mxCell id="A6usUt462V9UMGtc1Mbl-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-75" target="A6usUt462V9UMGtc1Mbl-77">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-75" value="Handspring Front Layout With 1/1 Twist&lt;br&gt;(5.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-75" value="Handspring Front Layout With 1/1 Twist&lt;br&gt;(4.4)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1550" y="1800" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-77" target="A6usUt462V9UMGtc1Mbl-78">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-77" value="Handspring Front Layout With 3/2 Twist&lt;br&gt;&lt;i&gt;Chusovtina&lt;br&gt;&lt;/i&gt;(5.4)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-77" value="Handspring Front Layout With 3/2 Twist&lt;br&gt;&lt;i&gt;Lou Yun&lt;br&gt;&lt;/i&gt;(4.8)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1710" y="1800" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="A6usUt462V9UMGtc1Mbl-78" value="Handspring Front Layout With 2/1 Twist&lt;br&gt;&lt;i&gt;Yeo&lt;br&gt;&lt;/i&gt;(5.8)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="A6usUt462V9UMGtc1Mbl-354" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-78" target="A6usUt462V9UMGtc1Mbl-352">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-78" value="Handspring Front Layout With 2/1 Twist&lt;i&gt;&lt;br&gt;&lt;/i&gt;(5.2)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="1870" y="1800" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-80" target="A6usUt462V9UMGtc1Mbl-81">
@@ -1005,6 +1008,15 @@
         </mxCell>
         <mxCell id="A6usUt462V9UMGtc1Mbl-349" value="&lt;div&gt;Dragulescu Piked&lt;/div&gt;&lt;div&gt;Ri Se Gwang 2&lt;/div&gt;&lt;div&gt;(6.0)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1720" y="1630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-355" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="A6usUt462V9UMGtc1Mbl-352" target="A6usUt462V9UMGtc1Mbl-353">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-352" value="&lt;div&gt;Handspring Front Layout With 5/2 Twist&lt;/div&gt;&lt;div&gt;Yeo 2&lt;br&gt;&lt;/div&gt;(5.6)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="2060" y="1800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A6usUt462V9UMGtc1Mbl-353" value="&lt;div&gt;Handspring Front Layout With 3/1 Twist&lt;/div&gt;&lt;div&gt;Yang Hak Seon&lt;br&gt;&lt;/div&gt;(6.0)" style="whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="2220" y="1800" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
