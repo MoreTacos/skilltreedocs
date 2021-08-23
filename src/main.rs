@@ -90,6 +90,36 @@ fn tramp(packages: State<Vec<Package>>) -> HtmlResponse<String> {
     HtmlResponse(tera.render("tramp", &context).unwrap())
 }
 
+#[get("/vault")]
+fn vault(packages: State<Vec<Package>>) -> HtmlResponse<String> {
+    let vault = packages
+        .inner()
+        .to_owned()
+        .into_iter()
+        .find(|p| p.packageurl == "MAG")
+        .unwrap()
+        .tabs
+        .into_iter()
+        .find(|t| t.taburl == "Vault")
+        .unwrap()
+        .content;
+    let mut tera = Tera::default();
+    tera.add_template_file("./templates/user.html.tera", Some("user"))
+        .unwrap();
+    tera.add_raw_template("vault", &vault).unwrap();
+
+    let mut skills = HashMap::new();
+    skills.insert("12airplane", 50);
+    skills.insert("basicbouncing", 100);
+    skills.insert("backtuck", 0);
+
+    let mut context = Context::new();
+    context.insert("username", "Davide");
+    context.insert("userurl", "abcdefg");
+    context.insert("skills", &skills);
+    HtmlResponse(tera.render("vault", &context).unwrap())
+}
+
 #[get("/backtuck")]
 fn backtuck(skills: State<Vec<Skill>>) -> HtmlResponse<String> {
     let backtuck = skills
@@ -118,17 +148,15 @@ fn main() {
         .send()
         .ok();
 
-    /*
     rocket::ignite()
         .manage(skills)
         .manage(packages)
         .mount("/static", StaticFiles::from("static"))
         .mount(
             "/",
-            routes![index, tramp, backtuck, skills_route, packages_route],
+            routes![index, tramp, vault, backtuck, skills_route, packages_route],
         )
         .launch();
-    */
 }
 
 fn load_skills() -> Vec<Skill> {
@@ -206,6 +234,8 @@ fn tabparse(content: String) -> String {
     // add a color to rect
     
     let mut content = content.replace(r###"fill="#cce5ff""###, "");
+    content = content.replace("<br />", "");
+    content = content.replace("&#xa;", "");
 
     let toggle = include_str!("../templates/toggle.html");
     let select_switch = Selector::parse("switch").unwrap();
@@ -250,11 +280,11 @@ fn tabparse(content: String) -> String {
         //let toggle_selector = Selector::parse("div.tw-toggle").unwrap();
         //let frag = Html::parse_document(&toggle);
         //let toggle = frag.select(&toggle_selector).next().unwrap();
-        let skillurl = Attribute {
+        let skillurlattr = Attribute {
             name: QualName::new(None, Namespace::from(""), LocalName::from("skillurl")),
-            value: skillurl.into(),
+            value: skillurl.clone().into(),
         };
-        let attrs = vec![skillurl];
+        let attrs = vec![skillurlattr];
         let flags = ElementFlags::default();
         let toggle = doc.create_element(QualName::new(None, Namespace::from(""), LocalName::from("drag")), attrs, flags);
         let child = NodeOrText::AppendNode(toggle);
@@ -267,7 +297,7 @@ fn tabparse(content: String) -> String {
         };
         let fill = Attribute {
             name: QualName::new(None, Namespace::from(""), LocalName::from("fill")),
-            value: Tendril::from(r###"hsl({% if skills.^@skillurl@^ %}{{ ^@skillurl@^ }}{% else %}0{% endif %}, 50%, 50%)"###)
+            value: Tendril::from(r###"hsl({% if skills.^@skillurl@^ %}{{ skills.^@skillurl@^ }}{% else %}0{% endif %}, 50%, 50%)"###.replace("^@skillurl@^", &skillurl))
         };
         let attrs = vec![class, fill];
         let target = rect.id();
@@ -275,17 +305,18 @@ fn tabparse(content: String) -> String {
     }
 
     let mut content = doc.root_element().html(); 
+    content = content.replace(r###"<html><!--?xml version="1.0" encoding="UTF-8"?-->"###, "");
+    content = content.replace("</html>", "");
+    content = content.trim().to_string();
     let select_drag = Selector::parse("drag").unwrap();
 
     for drag in doc.select(&select_drag) {
         let node = drag.html();
-        dbg!(&node);
         let skillurl = drag.value().attr("skillurl").unwrap();
         let toggle = toggle.clone().replace("^@skillurl@^", &skillurl);
         content = content.replace(&node, &toggle);
     }
 
-    dbg!(&content);
 
     let template = include_str!("../templates/tab.html");
     template.replace("^@@^", &content)
