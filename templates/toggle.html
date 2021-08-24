@@ -1,5 +1,7 @@
-<div class="toggle-div">
-  <div class="radio-item">
+<div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+  <span><a href="/skill?s=^@skillurl@^">^@skill@^</a></span>
+  <div class="toggle-div">
+    <div class="radio-item">
     <input
         {% if skills.^@skillurl@^ %}
           {% if skills.^@skillurl@^ == 0 %}
@@ -41,6 +43,7 @@
       value="100"
       onclick="fetch(`/update?u={{ userurl }}&s=^@skillurl@^&v=${this.value}`, { method: 'PUT' });
                 this.closest('g').previousElementSibling.style.fill = `hsl(${this.value}, 50%, 50%)`"
-    />
+      />
+    </div>
   </div>
 </div>

@@ -90,9 +90,9 @@ fn tramp(packages: State<Vec<Package>>) -> HtmlResponse<String> {
     HtmlResponse(tera.render("tramp", &context).unwrap())
 }
 
-#[get("/vault")]
-fn vault(packages: State<Vec<Package>>) -> HtmlResponse<String> {
-    let vault = packages
+#[get("/pommel")]
+fn pommel(packages: State<Vec<Package>>) -> HtmlResponse<String> {
+    let pommel = packages
         .inner()
         .to_owned()
         .into_iter()
@@ -100,13 +100,13 @@ fn vault(packages: State<Vec<Package>>) -> HtmlResponse<String> {
         .unwrap()
         .tabs
         .into_iter()
-        .find(|t| t.taburl == "Vault")
+        .find(|t| t.taburl == "Pommel")
         .unwrap()
         .content;
     let mut tera = Tera::default();
     tera.add_template_file("./templates/user.html.tera", Some("user"))
         .unwrap();
-    tera.add_raw_template("vault", &vault).unwrap();
+    tera.add_raw_template("pommel", &pommel).unwrap();
 
     let mut skills = HashMap::new();
     skills.insert("12airplane", 50);
@@ -117,7 +117,7 @@ fn vault(packages: State<Vec<Package>>) -> HtmlResponse<String> {
     context.insert("username", "Davide");
     context.insert("userurl", "abcdefg");
     context.insert("skills", &skills);
-    HtmlResponse(tera.render("vault", &context).unwrap())
+    HtmlResponse(tera.render("pommel", &context).unwrap())
 }
 
 #[get("/backtuck")]
@@ -154,7 +154,7 @@ fn main() {
         .mount("/static", StaticFiles::from("static"))
         .mount(
             "/",
-            routes![index, tramp, vault, backtuck, skills_route, packages_route],
+            routes![index, tramp, pommel, backtuck, skills_route, packages_route],
         )
         .launch();
 }
@@ -311,10 +311,14 @@ fn tabparse(content: String) -> String {
     let select_drag = Selector::parse("drag").unwrap();
 
     for drag in doc.select(&select_drag) {
-        let node = drag.html();
+        let skill = drag.parent().and_then(ElementRef::wrap).unwrap().text().next().unwrap();
+        dbg!(&skill);
         let skillurl = drag.value().attr("skillurl").unwrap();
-        let toggle = toggle.clone().replace("^@skillurl@^", &skillurl);
-        content = content.replace(&node, &toggle);
+        let skilldiv = drag.parent().and_then(ElementRef::wrap).unwrap().html();
+
+        let toggle = toggle.clone().replace("^@skillurl@^", &skillurl).replace("^@skill@^", &skill);
+
+        content = content.replace(&skilldiv, &toggle);
     }
 
 
