@@ -138,10 +138,29 @@ fn backtuck(skills: State<Vec<Skill>>) -> HtmlResponse<String> {
     HtmlResponse(tera.render("backtuck", &context).unwrap())
 }
 
+#[derive(Serialize, Clone)]
+struct Missing {
+    packageurl: String,
+    taburl: String,
+    skillurl: String,
+}
+
+#[get("/missing")]
+fn missing(missings: State<Vec<Missing>>) -> HtmlResponse<String> {
+    let mut tera = Tera::default();
+    tera.add_template_file("./templates/missing.html.tera", Some("missing")).unwrap();
+    let mut context = Context::new();
+    context.insert("missings", missings.inner());
+    HtmlResponse(tera.render("missing", &context).unwrap())
+}
+
 fn main() {
     // BUILD NEW FILES AND PARSE TREE FILE
+
+    let mut missings: Vec<Missing> = vec![];
+
     let skills = load_skills();
-    let packages = load_packages();
+    let packages = load_packages(&skills, &mut missings);
 
     reqwest::blocking::Client::new()
         .post("https://gymskilltree.com/sync")
@@ -151,10 +170,11 @@ fn main() {
     rocket::ignite()
         .manage(skills)
         .manage(packages)
+        .manage(missings)
         .mount("/static", StaticFiles::from("static"))
         .mount(
             "/",
-            routes![index, tramp, pommel, backtuck, skills_route, packages_route],
+            routes![index, tramp, pommel, backtuck, skills_route, packages_route, missing],
         )
         .launch();
 }
@@ -179,7 +199,7 @@ fn load_skills() -> Vec<Skill> {
     skills
 }
 
-fn load_packages() -> Vec<Package> {
+fn load_packages(skills: &Vec<Skill>, missings: &mut Vec<Missing>) -> Vec<Package> {
     let mut packages = vec![];
     for package in fs::read_dir("./packages").unwrap() {
         let path = package.unwrap().path();
@@ -199,7 +219,7 @@ fn load_packages() -> Vec<Package> {
 
             let taburl = path.file_stem().unwrap().to_str().unwrap().to_string();
             let content = fs::read_to_string(path).unwrap();
-            let content = tabparse(content);
+            let content = tabparse(content, &skills, missings, &packageurl, &taburl);
 
             let tab = Tab { taburl, content };
 
@@ -225,7 +245,7 @@ fn skillparse(content: String) -> String {
     template.replace("^@@^", &comrak::markdown_to_html(&content, &options))
 }
 
-fn tabparse(content: String) -> String {
+fn tabparse(content: String, skills: &Vec<Skill>, missings: &mut Vec<Missing>, packageurl: &str, taburl: &str) -> String {
     // goals:
     // parse the skill name
     // parse the skillurl
@@ -275,6 +295,15 @@ fn tabparse(content: String) -> String {
             .filter(|c| c.is_alphanumeric())
             .collect::<String>()
             .to_lowercase();
+
+        if !skills.into_iter().map(|x| x.url.clone()).collect::<String>().contains(&skillurl) {
+            let missing = Missing {
+                packageurl: packageurl.into(),
+                taburl: taburl.into(),
+                skillurl: skill.clone(),
+            };
+            missings.push(missing);
+        }
 
         let parent = skilldiv.id();
         //let toggle_selector = Selector::parse("div.tw-toggle").unwrap();
