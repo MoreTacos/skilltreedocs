@@ -312,7 +312,6 @@ fn tabparse(content: String) -> String {
 
     for drag in doc.select(&select_drag) {
         let skill = drag.parent().and_then(ElementRef::wrap).unwrap().text().next().unwrap();
-        dbg!(&skill);
         let skillurl = drag.value().attr("skillurl").unwrap();
         let skilldiv = drag.parent().and_then(ElementRef::wrap).unwrap().html();
 
