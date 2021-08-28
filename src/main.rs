@@ -154,6 +154,58 @@ fn missing(missings: State<Vec<Missing>>) -> HtmlResponse<String> {
     HtmlResponse(tera.render("missing", &context).unwrap())
 }
 
+#[derive(Serialize, Clone)]
+struct Tree {
+    package: String,
+    packagenice: String,
+    name: String,
+    namenice: String,
+}
+
+#[get("/trees")]
+fn trees() -> HtmlResponse<String> {
+    let mut tera = Tera::default();
+    tera.add_template_file("./templates/trees.html.tera", Some("trees")).unwrap();
+    let mut context = Context::new();
+    let mut trees: Vec<Tree> = vec![];
+    for package in fs::read_dir("./packages/").unwrap() {
+        let package = package.unwrap();
+        if !package.path().is_dir() {
+            continue;
+        }
+        let mut packagename = package.file_name().to_str().unwrap().to_string();
+        let packagenice = packagename.clone();
+        packagename = "packages%2F".to_string() + &packagename;
+        for tree in fs::read_dir(package.path()).unwrap() {
+            let tree = tree.unwrap();
+            let mut treename = tree.file_name().to_str().unwrap().to_string();
+            let namenice = treename.replace(".svg", "");
+            treename = treename.replace(" ", "%20");
+            let tree = Tree {
+                package: packagename.clone(),
+                packagenice: packagenice.clone(),
+                name: treename,
+                namenice,
+            };
+            trees.push(tree);
+        }
+    }
+    for devtree in fs::read_dir("./dev_packages").unwrap() {
+        let mut devtree = devtree.unwrap().file_name().to_str().unwrap().to_string();
+        let namenice = devtree.replace(".svg", "");
+        devtree = devtree.replace(" ", "%20");
+        let tree = Tree {
+            package: "dev_packages".into(),
+            packagenice: "DEV".into(),
+            name: devtree,
+            namenice,
+        };
+        trees.push(tree);
+    }
+    context.insert("trees", &trees);
+    HtmlResponse(tera.render("trees", &context).unwrap())
+}
+
 fn main() {
     // BUILD NEW FILES AND PARSE TREE FILE
 
@@ -174,7 +226,7 @@ fn main() {
         .mount("/static", StaticFiles::from("static"))
         .mount(
             "/",
-            routes![index, tramp, pommel, backtuck, skills_route, packages_route, missing],
+            routes![index, tramp, pommel, backtuck, skills_route, packages_route, missing, trees],
         )
         .launch();
 }
